@@ -21,13 +21,13 @@ contract InvoicePrice is ChainlinkClient, Ownable {
         jobId = _jobId;
     }
 
-    function requestInvoiceRate(string _days) public {
+    function requestInvoiceRate(string _score) public {
         Chainlink.Request memory req = buildChainlinkRequest(
             stringToBytes32(jobId),
             this,
             this.fulfillRate.selector
         );
-        req.add('days', _days);
+        req.add('score', _score);
         req.add('path', 'rate');
         sendChainlinkRequestTo(oracle, req, ORACLE_PAYMENT);
     }
