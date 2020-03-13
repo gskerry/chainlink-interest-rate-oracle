@@ -107,8 +107,9 @@ function slowthing(){
 
 // process();
 
-exports.execute = async function process(){
+exports.execute = async function (req, res){
   let payload = await slowthing();
   console.log("payload: ", payload)
-  return payload
+  // return payload
+  res.status(200).send(payload)
 }
