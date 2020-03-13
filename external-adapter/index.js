@@ -16,7 +16,7 @@ function getRate(score){
     fs.readFile('credentials.json', (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Sheets API.
-      authorize(JSON.parse(content), listMajors);
+      authorize(JSON.parse(content), getRateTable);
     });
 
     /**
@@ -74,7 +74,7 @@ function getRate(score){
      * @see https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
      * @param {google.auth.OAuth2} auth The authenticated Google OAuth client.
      */
-    function listMajors(auth) {
+    function getRateTable(auth) {
       const sheets = google.sheets({version: 'v4', auth});
       sheets.spreadsheets.values.get({
         spreadsheetId: '1e-UvE0V-PITTNBY-lhmGwdo0tAQ3Czn889ByVHQCSBQ',
