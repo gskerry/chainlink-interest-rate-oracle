@@ -9,7 +9,7 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 // time.
 const TOKEN_PATH = 'token.json';
 
-function slowthing(){
+function slowthing(score){
   return new Promise(function(resolve, reject){
 
     // Load client secrets from a local file.
@@ -78,7 +78,7 @@ function slowthing(){
       const sheets = google.sheets({version: 'v4', auth});
       sheets.spreadsheets.values.get({
         spreadsheetId: '1e-UvE0V-PITTNBY-lhmGwdo0tAQ3Czn889ByVHQCSBQ',
-        range: 'responsetable!C4:F4',
+        range: `responsetable!C${score}:F${score}`,
       }, (err, res) => {
         if (err){
           // return console.log('The API returned an error: ' + err);
@@ -99,17 +99,17 @@ function slowthing(){
 
 // slowthing().then((result) => console.log(result),(err) => console.log(err))
 
-// async function process(){
-//   let payload = await slowthing();
-//   console.log("payload: ", payload)
-//   return payload
-// }
-
-// process();
-
-exports.execute = async function (req, res){
-  let payload = await slowthing();
+async function process(){
+  let payload = await slowthing(3);
   console.log("payload: ", payload)
-  // return payload
-  res.status(200).send(payload)
+  return payload
 }
+
+process();
+
+// exports.execute = async function (req, res){
+//   let payload = await slowthing(4);
+//   console.log("payload: ", payload)
+//   // return payload
+//   res.status(200).send(payload)
+// }
