@@ -68,3 +68,8 @@ typings/
 .chainlink-kovan/db.sqlite3*
 .chainlink-kovan/log.jsonl
 .chainlink-kovan/secret
+
+# Other
+credentials.json
+*zip
+tutorial.js
