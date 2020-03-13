@@ -99,26 +99,30 @@ function getRate(score){
 
 // getRate().then((result) => console.log(result),(err) => console.log(err))
 
-// async function process(scoredat){
-//   let tier = scoredat > 90 ? 3
-//     : scoredat > 80 ? 4
-//     : scoredat > 70 ? 5
-//     : 6
-//   let payload = await getRate(tier);
-//   console.log("payload: ", payload)
-//   return payload
-// }
-
-// process(25);
-
-exports.execute = async function (req, res){
-  let scoredat = req.body && req.body.data && req.body.data.score || 0
+async function process(scoredat){
   let tier = scoredat > 90 ? 3
     : scoredat > 80 ? 4
     : scoredat > 70 ? 5
     : 6
   let payload = await getRate(tier);
-  console.log("payload: ", payload)
-  // return payload
-  res.status(200).send(payload)
+  let scores = payload.values[0]
+  let payload = {};
+  console.log("scores: ", scores)
+  return scores
 }
+
+process(25);
+
+// exports.execute = async function (req, res){
+//   let scoredat = req.body && req.body.data && req.body.data.score || 0
+//   let tier = scoredat > 90 ? 3
+//     : scoredat > 80 ? 4
+//     : scoredat > 70 ? 5
+//     : 6
+//   let sheetdat = await getRate(tier);
+//   let scores = sheetdat.values[0]
+//   let payload = {};
+//   console.log("scores: ", scores)
+//   // return scores
+//   res.status(200).send(scores)
+// }
