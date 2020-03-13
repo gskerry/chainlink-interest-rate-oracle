@@ -98,3 +98,5 @@ eth contract:send --kovan InvoicePrice@INVOCE_PRICE_CONTRACT_ADDRESS 'requestInv
 #### 9. Check out the results
 
 `InvoicePrice` contract emits the event `InvoiceProve(bytes32 indexed requestId, uint256 timestamp, uint256 price)` when the request to the External Adapter is fulfilled so go to https://kovan.etherscan.io/address/INVOCE_PRICE_CONTRACT_ADDRESS#events and check the event was emmited.
+
+.
