@@ -9,7 +9,7 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 // time.
 const TOKEN_PATH = 'token.json';
 
-function slowthing(score){
+function getRate(score){
   return new Promise(function(resolve, reject){
 
     // Load client secrets from a local file.
@@ -97,19 +97,28 @@ function slowthing(score){
   });
 } 
 
-// slowthing().then((result) => console.log(result),(err) => console.log(err))
+// getRate().then((result) => console.log(result),(err) => console.log(err))
 
-async function process(){
-  let payload = await slowthing(3);
-  console.log("payload: ", payload)
-  return payload
-}
-
-process();
-
-// exports.execute = async function (req, res){
-//   let payload = await slowthing(4);
+// async function process(scoredat){
+//   let tier = scoredat > 90 ? 3
+//     : scoredat > 80 ? 4
+//     : scoredat > 70 ? 5
+//     : 6
+//   let payload = await getRate(tier);
 //   console.log("payload: ", payload)
-//   // return payload
-//   res.status(200).send(payload)
+//   return payload
 // }
+
+// process(25);
+
+exports.execute = async function (req, res){
+  let scoredat = req.body && req.body.data && req.body.data.score || 0
+  let tier = scoredat > 90 ? 3
+    : scoredat > 80 ? 4
+    : scoredat > 70 ? 5
+    : 6
+  let payload = await getRate(tier);
+  console.log("payload: ", payload)
+  // return payload
+  res.status(200).send(payload)
+}
