@@ -40,6 +40,11 @@ For running a Chainlink node on GCP follow the instruction in https://medium.com
 
   - Follow the steps from [Chainlink Docs - Deploy your own Oracle contract](https://docs.chain.link/docs/fulfilling-requests#section-deploy-your-own-oracle-contract) and [Chainlink Docs - ](https://docs.chain.link/docs/fulfilling-requests#section-deploy-your-own-oracle-contract)
 
+#### 3. Create Google Sheets Response Table
+
+  - Organize your data in Google Sheets. Consolidate data to be returned to the oracle to facilitate queries. 
+  Follow the steps from [Google Sheets API documentation](https://developers.google.com/sheets/api/quickstart/nodejs) to enable API access to your spreadsheet. Be sure to note the URL to your spreadsheet (it includes the spreadsheet ID) 
+
 #### 3. Deploy External Adapter function
 
   - Follow the steps from https://chainlinkadapters.com/guides/run-external-adapter-on-gcp for deploying the `external-adapter` as a Cloud Function in GCP.
@@ -94,6 +99,7 @@ Fund `InvoiceContract` using `https://kovan.chain.link/`
 eth abi:add InvoicePrice PATH_TO_BUILD_FOLDER/contracts/InvoicePrice.json
 eth contract:send --kovan InvoicePrice@INVOCE_PRICE_CONTRACT_ADDRESS 'requestInvoiceRate("182")' --pk=YOUR_ADDRESS_PK
 ```
+The contract can also be executed via Etherscan platform (https://kovan.etherscan.io/address/<INVOCE_PRICE_CONTRACT_ADDRESS>) under Contract >> Write Contract
 
 #### 9. Check out the results
 
