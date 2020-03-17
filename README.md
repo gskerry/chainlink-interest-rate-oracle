@@ -1,6 +1,6 @@
-# Chainlink: Invoice Price Oracle
+# Chainlink: Invoice Interest Rate Oracle
 
-This POC creates an External Adapter that returns an invoice rate price based on days past due received as parameter, and a Consumer smart contract which will request the rate on demand.
+This POC creates an External Adapter that returns appropriate LTV interest rates, based on an invoice credit risk score received as parameter, and a Consumer smart contract which will request the rate on demand.
 
 **Note:** The following steps require some basic knowledge about the Chainlink stack: how to run a Chainlink Node, create Jobs, Bridges and External Initiators in the node, and deploy External Adapter functions. It is advisable to start by reading the [Chainlink Docs](https://docs.chain.link).
 
@@ -80,7 +80,7 @@ Create a job in the node like the following one
   }
 ```
 
-#### 7. Deploy InvoicePrice contract
+#### 7. Deploy InvoiceRate contract
 Within the `oracle` directory:
 
 ```bash
@@ -98,13 +98,13 @@ Fund `InvoiceContract` using `https://kovan.chain.link/`
 #### 8. Execute oracle method
 
 ```bash
-eth abi:add InvoicePrice PATH_TO_BUILD_FOLDER/contracts/InvoicePrice.json
-eth contract:send --kovan InvoicePrice@INVOCE_PRICE_CONTRACT_ADDRESS 'requestInvoiceRate("182")' --pk=YOUR_ADDRESS_PK
+eth abi:add InvoiceRate PATH_TO_BUILD_FOLDER/contracts/InvoiceRate.json
+eth contract:send --kovan InvoiceRate@INVOCE_PRICE_CONTRACT_ADDRESS 'requestInvoiceRate("182")' --pk=YOUR_ADDRESS_PK
 ```
 The contract can also be executed via Etherscan platform (https://kovan.etherscan.io/address/<INVOCE_PRICE_CONTRACT_ADDRESS>) under Contract >> Write Contract
 
 #### 9. Check out the results
 
-`InvoicePrice` contract emits the event `InvoiceProve(bytes32 indexed requestId, uint256 timestamp, uint256 price)` when the request to the External Adapter is fulfilled so go to https://kovan.etherscan.io/address/INVOCE_PRICE_CONTRACT_ADDRESS#events and check the event was emmited.
+`InvoiceRate` contract emits the event `LtvRatio(bytes32 indexed requestId, uint256 timestamp, uint256 price)` when the request to the External Adapter is fulfilled so go to https://kovan.etherscan.io/address/INVOCE_PRICE_CONTRACT_ADDRESS#events and check the event was emmited.
 
 .
