@@ -45,11 +45,13 @@ For running a Chainlink node on GCP follow the instruction in https://medium.com
   - Organize your data in Google Sheets. Consolidate data to be returned to the oracle to facilitate queries. 
   Follow the steps from [Google Sheets API documentation](https://developers.google.com/sheets/api/quickstart/nodejs) to enable API access to your spreadsheet. Be sure to note the URL to your spreadsheet (it includes the spreadsheet ID) 
 
-#### 3. Deploy External Adapter function
+#### 4. Deploy External Adapter function
 
   - Follow the steps from https://chainlinkadapters.com/guides/run-external-adapter-on-gcp for deploying the `external-adapter` as a Cloud Function in GCP.
 
-#### 4. Create bridge for the External Adapter
+    **Note:** If token expires, be sure to run adapter code locally and redeploy adapter with refreshed token.
+
+#### 5. Create bridge for the External Adapter
 
   Reference docs: https://docs.chain.link/docs/node-operators
 
@@ -61,7 +63,7 @@ For running a Chainlink node on GCP follow the instruction in https://medium.com
 
   **Note:** Bridge Name should be unique to the local node and the Bridge URL should be the URL of your external adapter, whether local or on a separate machine.
 
-#### 5. Create job which uses the bridge
+#### 6. Create job which uses the bridge
 
 Create a job in the node like the following one
 
@@ -78,7 +80,7 @@ Create a job in the node like the following one
   }
 ```
 
-#### 5. Deploy InvoicePrice contract
+#### 7. Deploy InvoicePrice contract
 Within the `oracle` directory:
 
 ```bash
